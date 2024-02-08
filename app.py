@@ -2,8 +2,11 @@ import streamlit as st
 import requests
 
 st.title("Hello World!")
-st.text_input("Enter a Number:")
+number = st.number_input("Enter a Number:", step=1)
 
-if st.button("Source"):
-    response = requests.get(st.secrets["endpoint"])
-    st.write(response.content)
+if st.button("Enter"):
+    chalice_endpoint = st.secrets["endpoint"]
+    endpoint = f"{chalice_endpoint}{number}"
+    response = requests.get(endpoint).json()
+    result = response['result']
+    st.title(result)
