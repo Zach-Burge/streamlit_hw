@@ -12,3 +12,5 @@ if st.button("Enter"):
     result = response.json()
     # result_data = result['result']
     st.title(f"{result['name']} will be {result['new_age']}")
+    st.title("JSON")
+    st.text(result)
