@@ -4,7 +4,7 @@ from sklearn.ensemble import RandomForestRegressor
 import numpy as np
 import pickle
 
-df = pd.read_csv("/Users/burgefamily/CPSC325/dspl-pga-tour-project/data/ASA All PGA Raw Data - Tourn Level.csv")
+df = pd.read_csv("data/ASA All PGA Raw Data - Tourn Level.csv")
 df.drop(columns = ['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4'], inplace = True)
 # print(df['pos'])
 df.replace('NA', np.nan, inplace=True)
