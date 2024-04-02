@@ -79,13 +79,13 @@ import pandas as pd
 from model import reg_rf
 
 # Load data
-df = pd.read_csv('streamlit_hw/data/ASA All PGA Raw Data - Tourn Level.csv')
+df = pd.read_csv('data/ASA All PGA Raw Data - Tourn Level.csv')
 
 # Load the machine learning model
 # with open('/Users/burgefamily/CPSC325/dspl-pga-tour-project/model.pkl', 'rb') as f:
 #     model = pickle.load(f)
 
-tournament_field_df = pd.read_csv('streamlit_hw/data/2024_masters.csv')
+tournament_field_df = pd.read_csv('data/2024_masters.csv')
 
 # API endpoint for tournament schedule
 pga_schedule_url = "https://feeds.datagolf.com/get-schedule?tour=pga&file_format=json&key=c8336af0079dd0eeec5576088e1b"
