@@ -110,22 +110,29 @@ if selected_tournament:
         st.write(f"**Course:** {tournament_info['course']}")
     else:
         st.write("Tournament information not found.")
+    if 'load' not in st.session_state:
+        st.session_state.load = 0
+    def set_state(state):
+        st.session_state.load = state
     if st.button("Load Field"):
+        set_state(1)
         st.write("## Field Data")
         st.write(tournament_field_df)
-    # tournament_test_df = df[df['tournament name'] == 'Masters Tournament']
-    # tournament_field_df['player id'] = tournament_field_df.index.astype(int) + 1
-    features = ['sg_putt', 'sg_arg', 'sg_app', 'sg_ott', 'sg_t2g', 'sg_total', 'player id']
-    X_test_df = tournament_field_df.iloc[:, 1:]
-    y_pred_df = reg_rf.predict(X_test_df)
-    player_map = tournament_field_df.set_index('player id')['player_name'].to_dict()
+        # tournament_test_df = df[df['tournament name'] == 'Masters Tournament']
+        # tournament_field_df['player id'] = tournament_field_df.index.astype(int) + 1
+    if st.session_state.load > 0:
+        features = ['sg_putt', 'sg_arg', 'sg_app', 'sg_ott', 'sg_t2g', 'sg_total', 'player id']
+        X_test_df = tournament_field_df.iloc[:, 1:]
+        y_pred_df = reg_rf.predict(X_test_df)
+        player_map = tournament_field_df.set_index('player id')['player_name'].to_dict()
 
-    predictions = pd.DataFrame({"player id": X_test_df['player id'], "Predicted Strokes": y_pred_df})
-    predictions['player_name'] = predictions['player id'].map(player_map)
+        predictions = pd.DataFrame({"player id": X_test_df['player id'], "Predicted Strokes": y_pred_df})
+        predictions['player_name'] = predictions['player id'].map(player_map)
 
-    predictions_sorted = predictions.sort_values(by="Predicted Strokes")
-    if st.button("Make Predictions"):
-        st.write(predictions_sorted)
+        predictions_sorted = predictions.sort_values(by="Predicted Strokes")
+        if st.button("Make Predictions"):
+            st.write(predictions_sorted)
+            st.session_state.load = 0
 
 # if st.button("Enter"):
 #     chalice_endpoint = st.secrets["endpoint"]
