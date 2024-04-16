@@ -58,7 +58,7 @@ if selected_tournament:
         predictions_sorted = predictions.sort_values(by="Predicted Strokes")
         if st.button("Make Predictions"):
             st.dataframe(predictions_sorted, hide_index=True)
-            tourney_actual = pd.read_csv("/Users/burgefamily/CPSC325/dspl-pga-tour-project/streamlit_hw/data/2024_masters_actual.csv")
+            tourney_actual = pd.read_csv("data/2024_masters_actual.csv")
             common_players = predictions_sorted.head(10).merge(tourney_actual.head(10), on='player_name')
             precision = len(common_players) / len(predictions_sorted.head(10))
             recall = len(common_players) / len(tourney_actual.head(10))

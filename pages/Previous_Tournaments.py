@@ -60,7 +60,7 @@ if selected_tournament:
             rows = st.columns(2)
             rows[0].write("## Predicted ")
             rows[0].dataframe(predictions_sorted, hide_index=True)
-            tourney_actual = pd.read_csv("/Users/burgefamily/CPSC325/dspl-pga-tour-project/streamlit_hw/data/2024_masters_actual.csv")
+            tourney_actual = pd.read_csv("data/2024_masters_actual.csv")
             rows[1].write("## Actual ")
             rows[1].dataframe(tourney_actual, hide_index=True)
             # F1 at 10
