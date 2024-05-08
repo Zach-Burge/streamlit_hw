@@ -36,7 +36,10 @@ if selected_tournament:
         
         # Dynamically load field data based on selected tournament
         field_data_filename = selected_tournament.lower().replace(" ", "_")
-        tournament_field_df = pd.read_csv(f"data/{field_data_filename}_2024.csv")
+        try:
+            tournament_field_df = pd.read_csv(f"data/{field_data_filename}_2024.csv")
+        except:
+            print("No field data for the selected tournament. Please try choosing a different tournament.")
         
         if 'load' not in st.session_state:
             st.session_state.load = 0
